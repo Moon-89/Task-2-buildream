@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { services } from '../data.js';
 
 export default function Services() {
@@ -5,11 +6,11 @@ export default function Services() {
     <section className="services" id="services">
       <h2 className="title">Explore Our Services</h2>
       <div className="svc-grid">
-        {services.map(({ title, text, img }) => (
+        {services.map(({ title, text, img, page }) => (
           <div className="svc" key={title} style={{ backgroundImage: `url("${img}")` }}>
             <h3>{title}</h3>
             <p>{text}</p>
-            <a href="#contact">Read More</a>
+            <Link to={page}>Read More</Link>
           </div>
         ))}
       </div>

@@ -1,34 +1,23 @@
-import ShareBar from './components/ShareBar.jsx';
-import Header from './components/Header.jsx';
-import Hero from './components/Hero.jsx';
-import About from './components/About.jsx';
-import LogoCarousel from './components/LogoCarousel.jsx';
-import Services from './components/Services.jsx';
-import Gallery from './components/Gallery.jsx';
-import Different from './components/Different.jsx';
-import CTA from './components/CTA.jsx';
-import Contact from './components/Contact.jsx';
-import Footer from './components/Footer.jsx';
-import ToTop from './components/ToTop.jsx';
-import { galleries } from './data.js';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout.jsx';
+import HomePage from './pages/HomePage.jsx';
+import AboutPage from './pages/AboutPage.jsx';
+import ServicePage from './pages/ServicePage.jsx';
+import ContactPage from './pages/ContactPage.jsx';
+import { pages } from './data.js';
 
 export default function App() {
   return (
-    <>
-      <ShareBar />
-      <Header />
-      <Hero />
-      <About />
-      <LogoCarousel />
-      <Services />
-      {galleries.map((g) => (
-        <Gallery key={g.id} {...g} />
-      ))}
-      <Different />
-      <CTA />
-      <Contact />
-      <Footer />
-      <ToTop />
-    </>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="about-us" element={<AboutPage />} />
+        {pages.map((p) => (
+          <Route key={p.path} path={p.path} element={<ServicePage {...p} />} />
+        ))}
+        <Route path="contact-us" element={<ContactPage />} />
+        <Route path="*" element={<HomePage />} />
+      </Route>
+    </Routes>
   );
 }

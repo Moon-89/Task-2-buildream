@@ -1,26 +1,29 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Logo from './Logo.jsx';
-import { menu } from '../data.js';
+import { menu, socials } from '../data.js';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [subOpen, setSubOpen] = useState(false);
   const isMobile = () => window.innerWidth <= 991;
+  const close = () => setOpen(false);
 
   return (
     <header className="header">
       <div className="topbar">
         <div className="container topbar-in">
           <ul className="contact-line">
-            <li><i className="fa-regular fa-envelope" /> info@we-build-dream.com</li>
+            <li><i className="fa-regular fa-envelope" /> <a href="mailto:info@we-build-dream.com">info@we-build-dream.com</a></li>
             <li><i className="fa-solid fa-location-dot" /> Karachi, Pakistan.</li>
-            <li><i className="fa-solid fa-phone" /> +92 300 2424517</li>
+            <li><i className="fa-solid fa-phone" /> <a href="tel:+923002424517">+92 300 2424517</a></li>
           </ul>
           <div className="social">
-            <a href="#" aria-label="Facebook"><i className="fa-brands fa-facebook-f" /></a>
-            <a href="#" aria-label="Twitter"><i className="fa-brands fa-twitter" /></a>
-            <a href="#" aria-label="Instagram"><i className="fa-brands fa-instagram" /></a>
-            <a href="#" aria-label="YouTube"><i className="fa-brands fa-youtube" /></a>
+            {socials.map((s) => (
+              <a key={s.label} href={s.href} aria-label={s.label} target="_blank" rel="noopener noreferrer">
+                <i className={`fa-brands ${s.icon}`} />
+              </a>
+            ))}
           </div>
         </div>
       </div>
@@ -33,24 +36,24 @@ export default function Header() {
           <ul className={`menu ${open ? 'open' : ''}`}>
             {menu.map((m) => (
               <li key={m.label} className={m.sub ? `has-sub ${subOpen ? 'open' : ''}` : ''}>
-                <a
-                  href={m.href}
+                <Link
+                  to={m.href}
                   onClick={(e) => {
-                    if (m.sub) {
-                      if (isMobile()) {
-                        e.preventDefault();
-                        setSubOpen(!subOpen);
-                      }
-                    } else setOpen(false);
+                    if (!m.sub) return close();
+                    // on mobile the parent only opens its submenu
+                    if (isMobile()) {
+                      e.preventDefault();
+                      setSubOpen(!subOpen);
+                    } else close();
                   }}
                 >
                   {m.label} {m.sub && <i className="fa-solid fa-angle-down" />}
-                </a>
+                </Link>
                 {m.sub && (
                   <ul className="sub">
                     {m.sub.map((s) => (
                       <li key={s.label}>
-                        <a href={s.href} onClick={() => setOpen(false)}>{s.label}</a>
+                        <Link to={s.href} onClick={close}>{s.label}</Link>
                       </li>
                     ))}
                   </ul>

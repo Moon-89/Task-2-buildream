@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { slides } from '../data.js';
 
 export default function Hero() {
@@ -24,8 +25,8 @@ export default function Hero() {
               <h1>{s.title}</h1>
               <p className="sub-text">{s.text}</p>
               <div className="hero-btns">
-                <a href="#about" className="btn">View More <i className="fa-solid fa-angle-right" /></a>
-                <a href="#contact" className="btn red">Book Now <i className="fa-solid fa-angle-right" /></a>
+                <Link to="/renovations" className="btn">View More <i className="fa-solid fa-angle-right" /></Link>
+                <Link to="/contact-us" className="btn red">Book Now <i className="fa-solid fa-angle-right" /></Link>
               </div>
             </div>
           </div>

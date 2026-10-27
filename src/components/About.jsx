@@ -1,8 +1,8 @@
-export default function About() {
+export default function About({ hideTitle = false }) {
   return (
     <section className="about" id="about">
       <div className="container">
-        <h2 className="title">About Us</h2>
+        {!hideTitle && <h2 className="title">About Us</h2>}
         <p>
           "Buildream Contactors &amp; Renovation (SMC) Pvt Limited," your premier construction and renovation
           partner with a rich legacy in Karachi, Pakistan. For many years, we have been transforming dreams into

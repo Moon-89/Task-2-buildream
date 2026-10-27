@@ -1,17 +1,7 @@
+import { Link } from 'react-router-dom';
 import Logo from './Logo.jsx';
+import { flatMenu, whatsappLink } from '../data.js';
 
-const links = [
-  ['Home', '#home'],
-  ['About us', '#about'],
-  ['Construction', '#construction'],
-  ['Residential Construction', '#construction', true],
-  ['Commercial Construction', '#construction', true],
-  ['Architect', '#architect'],
-  ['Real Estate', '#services'],
-  ['Interior Designs', '#interior'],
-  ['Renovations', '#renovation'],
-  ['Contact us', '#contact'],
-];
 
 export default function Footer() {
   return (
@@ -29,9 +19,9 @@ export default function Footer() {
         <div>
           <h4>Quick Links</h4>
           <ul className="qlinks">
-            {links.map(([label, href, sub]) => (
-              <li key={label + href} className={sub ? 'sub' : ''}>
-                <a href={href}>{label}</a>
+            {flatMenu.map((l) => (
+              <li key={l.label} className={l.sub ? 'sub' : ''}>
+                <Link to={l.href}>{l.label}</Link>
               </li>
             ))}
           </ul>
@@ -57,19 +47,20 @@ export default function Footer() {
           </p>
           <h5>PHONE</h5>
           <p>
-            <i className="fa-brands fa-whatsapp" /> +92 300 2424517
+            <i className="fa-brands fa-whatsapp" />{' '}
+            <a href={whatsappLink} target="_blank" rel="noopener noreferrer">+92 300 2424517</a>
           </p>
         </div>
       </div>
       <div className="copy">
         <div className="container copy-in">
           <span>
-            © All Right Reserved Website Designed by <a href="#">Awesome Marketing Services</a>
+            © All Right Reserved Website Designed by <a href="http://www.awems.com/" target="_blank" rel="noopener noreferrer">Awesome Marketing Services</a>
           </span>
           <span className="copy-links">
-            <a href="#home">Home</a>
-            <a href="#about">About us</a>
-            <a href="#contact">Contact us</a>
+            <Link to="/">Home</Link>
+            <Link to="/about-us">About us</Link>
+            <Link to="/contact-us">Contact us</Link>
           </span>
         </div>
       </div>
