@@ -227,3 +227,8 @@ textarea{resize:vertical}
 .side-menu a:hover{color:#d6111e}
 @media (max-width:991px){.page-layout{grid-template-columns:1fr;gap:20px}}
 @media (max-width:575px){.page-layout{padding:20px 18px 40px}.page-main{font-size:16px;line-height:1.35}.page-main img{float:none;display:block;margin:0 auto 14px}}
+
+/* ===== Animate on scroll (zoom-in + fade) ===== */
+.reveal{opacity:0;transform:scale(.85);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
